@@ -225,6 +225,7 @@
             // 
             // gbBusqueda
             // 
+            this.gbBusqueda.BackColor = System.Drawing.Color.RosyBrown;
             this.gbBusqueda.Controls.Add(this.txtBusqueda);
             this.gbBusqueda.Location = new System.Drawing.Point(12, 12);
             this.gbBusqueda.Name = "gbBusqueda";
@@ -235,6 +236,7 @@
             // 
             // gbDatos
             // 
+            this.gbDatos.BackColor = System.Drawing.Color.Silver;
             this.gbDatos.Controls.Add(this.lblId);
             this.gbDatos.Controls.Add(this.label1);
             this.gbDatos.Controls.Add(this.txtCodigo);
@@ -267,6 +269,7 @@
             // 
             // frmProducto
             // 
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(884, 540);
             this.Controls.Add(this.gbBusqueda);
             this.Controls.Add(this.dgvProductos);

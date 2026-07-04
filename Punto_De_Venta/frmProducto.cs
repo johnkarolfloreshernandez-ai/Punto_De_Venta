@@ -22,7 +22,39 @@ namespace Punto_De_Venta
 
         private void btnNuevo_Click(object sender, EventArgs e)
         {
+            {
+                if (!decimal.TryParse(txtPrecio.Text, out decimal precio) ||
+                    !int.TryParse(txtStock.Text, out int stock))
+                {
+                    MessageBox.Show("Datos inválidos");
+                    return;
+                }
 
+                try
+                {
+                    using (MySqlConnection conn = conexion.GetConnection())
+                    {
+                        string query = @"INSERT INTO productos    (codigo, descripcion, precio, stock, categoria) VALUES (@cod, @nom, @precio, @stock, @cat)";
+
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@cod", txtCodigo.Text);
+                        cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
+                        cmd.Parameters.AddWithValue("@precio", precio);
+                        cmd.Parameters.AddWithValue("@stock", stock);
+                        cmd.Parameters.AddWithValue("@cat", cmbCategorias.Text);
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Producto agregado");
+                        CargarDatos();
+                        Limpiar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
 
         private void frmProducto_Load(object sender, EventArgs e)
@@ -57,5 +89,16 @@ namespace Punto_De_Venta
         {
             CargarDatos(txtBusqueda.Text);
         }
+        private void Limpiar()
+        {
+            lblId.Text = "0";
+            txtCodigo.Clear();
+            txtNombre.Clear();
+            txtPrecio.Clear();
+            txtStock.Clear();
+            cmbCategorias.SelectedIndex = -1;
+        }
+
+
     }
 }

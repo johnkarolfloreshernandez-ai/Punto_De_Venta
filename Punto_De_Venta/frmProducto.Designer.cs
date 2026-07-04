@@ -125,6 +125,7 @@
             this.cmbCategorias.Name = "cmbCategorias";
             this.cmbCategorias.Size = new System.Drawing.Size(150, 21);
             this.cmbCategorias.TabIndex = 10;
+           
             // 
             // btnNuevo
             // 

@@ -16,5 +16,17 @@ namespace Punto_De_Venta
         {
             InitializeComponent();
         }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            frmPrincipal principal = new frmPrincipal();
+            this.Hide();
+            principal.Show();
+        }
     }
 }

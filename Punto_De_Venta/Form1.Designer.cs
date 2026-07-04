@@ -58,7 +58,7 @@
             this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.UseVisualStyleBackColor = false;
-
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // lblUser
             // 
@@ -89,15 +89,16 @@
             this.panel1.Size = new System.Drawing.Size(300, 220);
             this.panel1.TabIndex = 0;
             // 
-            // frmLogin
+            // FrmLogin
             // 
             this.ClientSize = new System.Drawing.Size(350, 280);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "frmLogin";
+            this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "InventarioApp — Iniciar sesión";
+            this.Load += new System.EventHandler(this.FrmLogin_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

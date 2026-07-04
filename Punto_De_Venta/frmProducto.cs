@@ -14,7 +14,6 @@ namespace Punto_De_Venta
     public partial class frmProducto : Form
     {
         Conexion conexion = new Conexion();
-        int idSeleccionado = 0;
         public frmProducto()
         {
             InitializeComponent();
@@ -151,6 +150,39 @@ namespace Punto_De_Venta
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (lblId.Text == "0")
+            {
+                MessageBox.Show("Selecciona un producto");
+                return;
+            }
+
+            if (MessageBox.Show("¿Eliminar producto?", "Confirmar", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    using (MySqlConnection conn = conexion.GetConnection())
+                    {
+                        string query = "DELETE FROM productos WHERE producto_id=@id";
+
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@id", lblId.Text);
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Eliminado");
+                        CargarDatos();
+                        Limpiar();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
         }
     }
 }

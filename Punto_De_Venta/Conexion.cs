@@ -8,28 +8,23 @@ using System.Windows.Forms;
 
 namespace Punto_De_Venta
 {
-    internal class Conexion
-    {
-        private readonly string cadena;
 
-        public Conexion()
+        public class Conexion
         {
-            cadena = "Server=localhost; Database=puntobd; Uid=root; Pwd=; Port=3307";
-        }
+            private string cadena = "Server=localhost; Database=Puntodb; Uid=root; Pwd=; Port=3307";
 
-        public MySqlConnection getConection()
-        {
-            try
+            public MySqlConnection GetConnection()
             {
-                MySqlConnection con = new MySqlConnection(cadena);
-                con.Open();
-                return con;
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection(cadena);
+                    conn.Open();
+                    return conn;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Error al conectar con la base de datos: " + ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error de coneccion : " + ex.Message);
-                return null;
-            }
-        }
-    }
+        }   
 }

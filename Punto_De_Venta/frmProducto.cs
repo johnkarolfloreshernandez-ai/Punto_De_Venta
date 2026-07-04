@@ -99,6 +99,58 @@ namespace Punto_De_Venta
             cmbCategorias.SelectedIndex = -1;
         }
 
+        private void dgvProductos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow fila = dgvProductos.Rows[e.RowIndex];
+
+                lblId.Text = fila.Cells["producto_id"].Value.ToString();
+                txtCodigo.Text = fila.Cells["codigo"].Value.ToString();
+                txtNombre.Text = fila.Cells["descripcion"].Value.ToString();
+                txtPrecio.Text = fila.Cells["precio"].Value.ToString();
+                txtStock.Text = fila.Cells["stock"].Value.ToString();
+                cmbCategorias.Text = fila.Cells["categoria"].Value.ToString();
+            }
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (lblId.Text == "0")
+            {
+                MessageBox.Show("Selecciona un producto");
+                return;
+            }
+
+            try
+            {
+                using (MySqlConnection conn = conexion.GetConnection())
+                {
+                    string query = @"UPDATE productos SET codigo=@cod, descripcion=@nom, precio=@precio, stock=@stock, categoria=@cat WHERE producto_id=@id";
+
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+
+                    cmd.Parameters.AddWithValue("@cod", txtCodigo.Text);
+                    cmd.Parameters.AddWithValue("@nom", txtNombre.Text);
+                    cmd.Parameters.AddWithValue("@precio", txtPrecio.Text);
+                    cmd.Parameters.AddWithValue("@stock", txtStock.Text);
+                    cmd.Parameters.AddWithValue("@cat", cmbCategorias.Text);
+                    cmd.Parameters.AddWithValue("@id", lblId.Text);
+
+                    cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("Producto actualizado");
+                    CargarDatos();
+                    Limpiar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 }

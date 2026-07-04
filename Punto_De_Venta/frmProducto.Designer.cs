@@ -80,6 +80,7 @@
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(860, 220);
             this.dgvProductos.TabIndex = 1;
+            this.dgvProductos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellContentClick);
             // 
             // lblId
             // 
@@ -121,11 +122,14 @@
             // cmbCategorias
             // 
             this.cmbCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCategorias.Items.AddRange(new object[] {
+            "Bebidas",
+            "Botanas",
+            "Otros"});
             this.cmbCategorias.Location = new System.Drawing.Point(615, 48);
             this.cmbCategorias.Name = "cmbCategorias";
             this.cmbCategorias.Size = new System.Drawing.Size(150, 21);
             this.cmbCategorias.TabIndex = 10;
-           
             // 
             // btnNuevo
             // 
@@ -155,6 +159,7 @@
             this.btnEditar.TabIndex = 1;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // btnEliminar
             // 
